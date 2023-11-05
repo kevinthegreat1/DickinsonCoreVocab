@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import org.openqa.selenium.By;
@@ -30,8 +31,8 @@ public class FlashCardScene {
         scene = new Scene(root);
         scene.setOnKeyReleased(event -> {
             switch (event.getCode()) {
-                case RIGHT -> parent.setFlashCardScene(index + 1);
-                case LEFT -> parent.setFlashCardScene(index - 1);
+                case RIGHT -> parent.setFlashCardScene(index + getIncrement(event));
+                case LEFT -> parent.setFlashCardScene(index - getIncrement(event));
                 case DIGIT0 -> parent.setFlashCardScene(0);
                 case DIGIT1 -> parent.setFlashCardScene(100);
                 case DIGIT2 -> parent.setFlashCardScene(200);
@@ -55,5 +56,15 @@ public class FlashCardScene {
         VBox.setVgrow(spacer, Priority.ALWAYS);
         HBox.setHgrow(spacer, Priority.ALWAYS);
         return spacer;
+    }
+
+    private int getIncrement(KeyEvent event) {
+        if (event.isShortcutDown()) {
+            return 50;
+        }
+        if (event.isAltDown()) {
+            return 10;
+        }
+        return 1;
     }
 }
