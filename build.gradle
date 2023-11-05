@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group 'com.kevinthegreat'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    seleniumVersion = '4.15.0'
+    junitVersion = '5.10.0'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+javafx {
+    version = '21.0.1'
+    modules = [ 'javafx.controls' ]
+}
+
+application {
+    mainClassName = "com.kevinthegreat.dickinsoncorevocab.DickinsonCoreVocab"
+}
+
+test {
+    useJUnitPlatform()
+}
