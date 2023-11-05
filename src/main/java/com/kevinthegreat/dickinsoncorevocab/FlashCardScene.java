@@ -22,8 +22,9 @@ public class FlashCardScene {
         partOfSpeech.setStyle("-fx-font-size: 32;");
         Text rank = new Text(row.findElement(By.xpath("./td[5]")).getText());
         rank.setStyle("-fx-font-size: 32;");
-        Pane rankRow = new HBox();
-        rankRow.getChildren().addAll(createSpacer(), rank);
+        HBox rankRow = new HBox();
+        rankRow.setAlignment(Pos.BOTTOM_RIGHT);
+        rankRow.getChildren().add(rank);
         VBox root = new VBox();
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(64));
